@@ -2,6 +2,11 @@ module Main where
 
 import qualified Data.Map as Map
 
+{-
+Alternatively, to avoid the lambda.
+insertEdge m (x:y:_) = Map.insert x (y: Map.findWithDefault [] x m) (Map.insert y (x: Map.findWithDefault [] y m) m)
+    gg = foldl insertEdge Map.empty edges
+-}
 countSubTrees :: Int -> [[Int]] -> String -> [Int]
 countSubTrees n edges labels =
     let gg = foldl (\m (x:y:_) -> Map.insert x (y: Map.findWithDefault [] x m) (Map.insert y (x: Map.findWithDefault [] y m) m)) Map.empty edges
